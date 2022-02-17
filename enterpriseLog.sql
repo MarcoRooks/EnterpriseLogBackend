@@ -5,7 +5,7 @@ CREATE TABLE empresas (
     idusuario uniqueidentifier,
     nombre varchar(255),
     sector varchar(255),
-    fecha_creacion int,
+    fecha_creacion datetime,
     logotipo varchar(255),
     pagina_web varchar(255),
     numero_telefono int,
