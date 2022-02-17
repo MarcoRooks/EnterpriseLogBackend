@@ -5,6 +5,7 @@ CREATE TABLE empresas (
     idusuario uniqueidentifier,
     nombre varchar(255),
     sector varchar(255),
+    fecha_creacion int,
     logotipo varchar(255),
     pagina_web varchar(255),
     numero_telefono int,
@@ -35,6 +36,7 @@ CREATE TABLE usuarios (
     email varchar(255),
     avatar varchar(255),
     username varchar(255),
+    userpass varchar(255),
     time_modification datetime,
     CONSTRAINT PK_puesto PRIMARY KEY (idusuario, email)
 );
