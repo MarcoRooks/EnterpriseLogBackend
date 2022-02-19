@@ -1,42 +1,42 @@
-CREATE DATABASE enterprise;
-
-CREATE TABLE empresas (
-    idempresa uniqueidentifier,
-    idusuario uniqueidentifier,
-    nombre varchar(255),
-    sector varchar(255),
-    fecha_creacion int,
-    logotipo varchar(255),
-    pagina_web varchar(255),
-    numero_telefono int,
-    social_media varchar(255),
-    descripcion varchar(255),
-    valoracion money,
-    num_empleados int,
-    imagen varchar(255),
-    time_modification datetime,
-    CONSTRAINT PK_empresas PRIMARY KEY (idempresa),
-    FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario)
+CREATE TABLE users (
+    iduser uuid, 
+    name_description varchar(255), 
+    email varchar(255), 
+    avatar varchar(255), 
+    username varchar(255), 
+    userpass varchar(255), 
+    time_modification date, 
+    CONSTRAINT PK_puesto 
+    PRIMARY KEY (iduser, email)
 );
 
-CREATE TABLE empleados (
-    idempresa uniqueidentifier,
-    idempleado serial,
-    nombre varchar(255),
-    foto varchar(255),
-    historial varchar(255),
-    time_modification datetime
-    CONSTRAINT PK_empleados PRIMARY KEY (idempresa, idempleado),
-    FOREIGN KEY (idempresa) REFERENCES empresas(idempresa)
+CREATE TABLE companies (
+    idcompany uuid, 
+    iduser uuid, 
+    name_description varchar(255), 
+    sector varchar(255), 
+    creation_date date, 
+    logo varchar(255), 
+    webpage varchar(255), 
+    phone_number int, 
+    social_media varchar(255), 
+    company_description varchar(255), 
+    company_value money, 
+    num_employees int, 
+    images varchar(255), 
+    time_modification date, 
+    CONSTRAINT PK_companies PRIMARY KEY (idcompany), 
+    FOREIGN KEY (iduser) REFERENCES users(iduser)
 );
 
-CREATE TABLE usuarios (
-    idusuario uniqueidentifier,
-    nombre varchar(255),
-    email varchar(255),
-    avatar varchar(255),
-    username varchar(255),
-    userpass varchar(255),
-    time_modification datetime,
-    CONSTRAINT PK_puesto PRIMARY KEY (idusuario, email)
+CREATE TABLE workers (
+    idcompany uuid, 
+    idworker serial, 
+    name_description varchar(255), 
+    foto varchar(255), 
+    historial varchar(255), 
+    time_modification date
+    CONSTRAINT PK_workers PRIMARY KEY (idcompany, idworker),
+    FOREIGN KEY (idcompany) REFERENCES companys(idcompany)
 );
+
