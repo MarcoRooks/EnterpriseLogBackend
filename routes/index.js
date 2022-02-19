@@ -1,7 +1,7 @@
 var router = require('express').Router();
 
-router.use('/empresas', require('./empresas'));
-router.use('/empleados', require('./empleados'));
-router.use('/usuarios', require('./usuarios'));
+router.use('/companies', require('./companies'));
+router.use('/workers', require('./workers'));
+router.use('/users', require('./users'));
 
 module.exports = router;
