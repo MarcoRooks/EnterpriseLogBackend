@@ -1,7 +1,10 @@
-class Empleado{
-    constructor(usuario, userpass){
-        this.usuario = usuario
-        this.userpass = userpass
-        this.email = email
+class Workers{
+    #name_description
+    #foto
+    #historial
+    constructor(props){
+        this.#name_description = props.name_description;
+        this.#foto = props.foto;
+        this.#historial = props.historial;
     }
 }
