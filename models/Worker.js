@@ -8,3 +8,6 @@ class Workers{
         this.#historial = props.historial;
     }
 }
+
+
+export default Worker

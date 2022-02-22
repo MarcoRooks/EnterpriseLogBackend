@@ -1,0 +1,5 @@
+function getAllUsers(req, res) {
+    res.status(200).json("Get all users");
+}
+
+module.exports = getAllUsers
