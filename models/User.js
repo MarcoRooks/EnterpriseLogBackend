@@ -12,3 +12,5 @@ class User{
         this.#avatar = props.avatar
     }
 }
+
+export default User
