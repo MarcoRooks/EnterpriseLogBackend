@@ -1,9 +1,19 @@
-/* const data = require(); */
 
-function userID(req,res){
-    const users = usersManager.getAll();
-    changeUsers(users)
+function user(req,res){
+    
     res.json(users)
 }
 
-module.exports = userID
+module.exports = user
+
+
+/* let criterions = {criteria: `=`,
+    key: `username`,
+    value: req.params.username,
+    nextConcat: `AND`,
+    key2: `userpass`,
+    value2: req.params.userpass
+    };
+
+    const users = usersManager.getByLogin(criterions);
+    changeUsers(users) */
