@@ -15,7 +15,7 @@ CREATE TABLE companies (
     iduser uuid, 
     name_description varchar(255), 
     sector varchar(255), 
-    creation_date date, 
+    creation_date varchar(255), 
     logo varchar(255), 
     webpage varchar(255), 
     phone_number int, 

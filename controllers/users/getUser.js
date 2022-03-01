@@ -9,7 +9,7 @@ function user(req,res){
 
     const users = usersManager.getByLogin(criterions);
     changeUsers(users) */
-    res.json("users")
+    res.status(200).json("users")
 }
 
 module.exports = user
