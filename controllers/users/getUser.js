@@ -1,3 +1,6 @@
+const client = require('../../managers/connection');
+
+
 function user(req,res){
     /* let criterions = {criteria: `=`,
         key: `username`,

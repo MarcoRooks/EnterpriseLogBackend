@@ -1,30 +1,32 @@
-/* Import model to create the objecct, 
-import the client */
-import client from "../managers/connection.js";
+const {myClient} = require('../managers/connection')
+const {User} = require('../models/User.js')
+
+/* import myClient from "../managers/connection"; */
+/* import  User from "../models/User.js" */
 
 class usersManager{
 
   getAll(){
-    const users = client.query("SELECT * FROM Users;");
+    const users = myClient.query("SELECT * FROM Users;");
     newUsers = users.map((user) => new User(user));
-    client.end();
+    myClient.end();
     return newUsers;
   }
 
   //Esta ingresando username y userpass
   getByLogin(){
-    let criterions = {criteria: `=`,
+    let criterions = {criteria: `${criteria}`,
     key: `username`,
     value: req.params.username,
     nextConcat: `AND`,
     key2: `userpass`,
     value2: req.params.userpass
     };
-    
+
     const users = client.query(`SELECT * FROM Users WHERE ${criterions.key} ${criterions.criteria} ${criterions.value} ${criterions.nextConcat} ${criterions.key2} ${criterions.criteria} ${criterions.value2};`);
     
     client.end();
-    return newUsers;
+    return users;
   }
 
   //Dar alta de Nuevo Usuario
@@ -49,4 +51,5 @@ class usersManager{
 
 }
 
+module.exports = usersManager
 

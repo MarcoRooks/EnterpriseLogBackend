@@ -24,7 +24,7 @@ CREATE TABLE companies (
     company_value money, 
     num_employees int, 
     images varchar(255), 
-    time_modification varchar(255), 
+    time_modification date, 
     CONSTRAINT PK_companies PRIMARY KEY (idcompany), 
     FOREIGN KEY (iduser) REFERENCES users(iduser)
 );

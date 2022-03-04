@@ -1,6 +1,7 @@
 const { Client } = require('pg')
 
-try {
+
+/* try { */
     const connectionData = {
         user: 'postgres',
         host: 'localhost',
@@ -13,6 +14,11 @@ try {
     myClient.connect();
     console.log(" active");
         
-} catch (error) {
+/* } catch (error) {
     console.log(error)
 }
+let i = ppppp() */
+
+module.exports = myClient
+
+

@@ -1,4 +1,5 @@
 import client from "../managers/connection.js";
+import Worker from "../models/Worker";
 
 class workersManager{
     
@@ -7,7 +8,7 @@ class workersManager{
         const workers = client.query("SELECT * FROM workers;");
         
         client.end();
-        return newWorkers;
+        return  new newWorkers;
     };
 
     //Brigns workers with one condition

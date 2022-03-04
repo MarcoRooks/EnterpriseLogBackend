@@ -1,7 +1,9 @@
+const client = require('../../managers/connection');
+
 
 function user(req,res){
     
-    res.json(users)
+    res.status(200).json("users")
 }
 
 module.exports = user

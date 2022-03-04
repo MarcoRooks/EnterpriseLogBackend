@@ -1,4 +1,5 @@
 import client from "../managers/connection.js";
+import Company from "../models/Company"
 
 class companiesManager{
     

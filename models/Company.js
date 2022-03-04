@@ -1,4 +1,6 @@
 class Company{
+    #idcompany
+    #iduser
     #name_description
     #sector
     #creation_date
@@ -10,7 +12,10 @@ class Company{
     #company_value
     #num_employees
     #images
+    #time_modification
     constructor(props){
+        this.#idcompany = props.idcompany;
+        this.#iduser = props.iduser;
         this.#name_description = props.name_description;
         this.#sector = props.sector;
         this.#creation_date = props.creation_date;
@@ -22,5 +27,6 @@ class Company{
         this.#company_value = props.company_description;
         this.#num_employees = props.num_employees;
         this.#images = props.images;
+        this.#time_modification = props.time_modification;
     }
 }
