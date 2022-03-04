@@ -15,7 +15,7 @@ CREATE TABLE companies (
     iduser uuid, 
     name_description varchar(255), 
     sector varchar(255), 
-    creation_date date, 
+    creation_date varchar(255), 
     logo varchar(255), 
     webpage varchar(255), 
     phone_number int, 
@@ -24,7 +24,7 @@ CREATE TABLE companies (
     company_value money, 
     num_employees int, 
     images varchar(255), 
-    time_modification date, 
+    time_modification varchar(255), 
     CONSTRAINT PK_companies PRIMARY KEY (idcompany), 
     FOREIGN KEY (iduser) REFERENCES users(iduser)
 );

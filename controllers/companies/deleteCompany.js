@@ -1,4 +1,5 @@
 function deleteCompany(req, res) {
+    companiesManager.delete()
     res.status(200).json("delete company")
 }
 
