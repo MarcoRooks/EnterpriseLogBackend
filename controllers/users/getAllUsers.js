@@ -1,4 +1,4 @@
-const { getAll} = require('../../managers/usersManager')
+const usersManager = require('../../managers/usersManager');
 
 function getAllUsers(req, res) {
     let answer = getAll();

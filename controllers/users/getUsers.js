@@ -1,4 +1,4 @@
-const client = require('../../managers/connection');
+const usersManager = require('../../managers/usersManager');
 
 
 function user(req,res){

@@ -1,4 +1,4 @@
-const client = require('../../managers/connection');
+const workersManager = require('../../managers/workersManager');
 
 function modWorker(req, res) {
     workersManager.mod()

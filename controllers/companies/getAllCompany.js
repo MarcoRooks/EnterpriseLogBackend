@@ -1,3 +1,4 @@
+const companiesManager = require('../../managers/companiesManager');
 
 function getAllCompany(req, res) {
     companiesManager.getAll()

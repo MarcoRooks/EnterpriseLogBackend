@@ -1,5 +1,9 @@
-import client from "../managers/connection.js";
-import Company from "../models/Company"
+/* import client from "../managers/connection.js";
+import Company from "../models/Company" */
+const client = require("../managers/connection.js");
+const Company = require("../models/Company");
+
+
 
 class companiesManager{
     

@@ -1,5 +1,5 @@
-const {myClient} = require('../managers/connection')
-const {User} = require('../models/User.js')
+const myClient = require('../managers/connection')
+const User = require('../models/User.js')
 
 /* import myClient from "../managers/connection"; */
 /* import  User from "../models/User.js" */
@@ -23,9 +23,9 @@ class usersManager{
     value2: req.params.userpass
     };
 
-    const users = client.query(`SELECT * FROM Users WHERE ${criterions.key} ${criterions.criteria} ${criterions.value} ${criterions.nextConcat} ${criterions.key2} ${criterions.criteria} ${criterions.value2};`);
+    const users = myClient.query(`SELECT * FROM Users WHERE ${criterions.key} ${criterions.criteria} ${criterions.value} ${criterions.nextConcat} ${criterions.key2} ${criterions.criteria} ${criterions.value2};`);
     
-    client.end();
+    myClient.end();
     return users;
   }
 
@@ -33,19 +33,19 @@ class usersManager{
   createUser(){
     const {username, email, userpass} = req.body
     
-    let newUser = client.query(`INSERT INTO users (username, email, userpass) VALUE (${username}, ${email}, ${userpass});`)
+    let newUser = myClient.query(`INSERT INTO users (username, email, userpass) VALUE (${username}, ${email}, ${userpass});`)
 
-    client.end()
+    myClient.end()
     return newUser
   }
 
   mod(){
-    const modUser = client.query(`UPDATE workers SET 
+    const modUser = myClient.query(`UPDATE workers SET 
         name_description = ${name_description}, 
         foto = ${foto}, 
         historial = ${historial}`)
 
-    client.end()
+    myClient.end()
     return modUser
   }
 
