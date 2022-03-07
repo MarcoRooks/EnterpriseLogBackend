@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+
 
 class User {
 
@@ -13,7 +13,6 @@ class User {
     #image = "https://www.latercera.com/resizer/ZwYtLBDucTx2GhRF45twlp7Ikxs=/375x250/smart/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/IWE35XK3SFCNBGJYGC65NCEONA.jpg";
 
     constructor() {
-        this.#iduser = uuidv4(); 
         this.#userName = this.#generateRandomName();
         this.#userPass = this.#generateRandomPass();
         this.#userEmail = this.#generateRandomEmail();

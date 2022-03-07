@@ -1,5 +1,5 @@
 CREATE TABLE users (
-    iduser uuid, 
+    iduser uuid unique, 
     name_description varchar(255), 
     email varchar(255), 
     avatar varchar(255), 
