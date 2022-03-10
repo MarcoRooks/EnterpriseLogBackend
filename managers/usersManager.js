@@ -9,10 +9,16 @@ class usersManager{
   async getAll(){
     const client = new Client(connection);
     await client.connect()
-    const users = await client.query("SELECT * FROM Users;");
+    const users = await client.query("SELECT * FROM users;");
     newUsers = users.map((user) => new User(user));
     await client.end();
     return newUsers;
+  }
+
+  async getUser(data){
+    const client = new Client(connection);
+    await client.connect()
+    const user = await client.query(`SELECT * FROM users WHERE iduser = '${data.iduser}'`)
   }
 
   //Esta ingresando username y userpass
@@ -20,7 +26,7 @@ class usersManager{
     const client = new Client(connection);
     await client.connect()
 
-    const users = await client.query(`SELECT * FROM Users WHERE username = '${data.username}' AND userpass = '${data.userpass}';`);
+    const users = await client.query(`SELECT * FROM users WHERE username = '${data.username}' AND userpass = '${data.userpass}';`);
     
     await client.end();
     return users;

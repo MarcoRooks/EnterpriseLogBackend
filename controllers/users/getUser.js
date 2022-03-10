@@ -2,17 +2,13 @@ const usersManager = require('../../managers/usersManager');
 
 
 function user(req,res){
-    /* let criterions = {criteria: `=`,
-        key: `username`,
-        value: req.params.username,
-        nextConcat: `AND`,
-        key2: `userpass`,
-        value2: req.params.userpass
-    };
+    const user = usersManager.getByLogin();
 
-    const users = usersManager.getByLogin(criterions);
-    changeUsers(users) */
-    res.status(200).json("users")
+    if (user == false) {
+        res.status(204).json("Petition not found")
+    } else {
+        res.status(200).json(user)
+    }
 }
 
 module.exports = user

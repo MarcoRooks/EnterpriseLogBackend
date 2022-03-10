@@ -1,11 +1,12 @@
 const usersManager = require('../../managers/usersManager');
 
 function getAllUsers(req, res) {
-    let answer = getAll();
-    if (answer == []){ 
-        res.status(201).json("No users") 
+    let companies = usersManager.getAll();
+    
+    if (companies == false) { 
+        res.status(204).json("No users") 
     }else {
-        res.status(200).json({data: answer});
+        res.status(200).json(companies);
     }
     
 }

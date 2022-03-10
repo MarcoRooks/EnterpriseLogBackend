@@ -1,9 +1,9 @@
 const companiesManager = require('../../managers/companiesManager');
 
 function createCompany(req, res) {
-    const kaka = companiesManager.create()
+    const created = companiesManager.create()
 
-    if (kaka == 'false') {
+    if (created == 'false') {
         res.status(204).json("Opcion no disponible")
     }else{
         res.status(201).json("Creado");
