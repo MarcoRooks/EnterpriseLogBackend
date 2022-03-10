@@ -1,54 +1,65 @@
-const myClient = require('../managers/connection')
-const Workers = require('../models/Worker')
+const {Client} = require('pg');
+const connection = require('../managers/connection');
+const Workers = require('../models/Worker');
 
 class workersManager{
     
     //brings forward all the workers in the table
-    getAll(){
-        const workers = myClient.query("SELECT * FROM workers;");
+    async getAll(){
+        const client = new Client(connection);
+        await client.connect()
+        const workers = await client.query("SELECT * FROM workers;");
         newWorkers = workers.map((worker) => new Workers(worker));
-        myClient.end();
-        return  new newWorkers;
+        await client.end();
+        return newWorkers;
     };
 
     //Brigns workers with one condition
-    getByCriterias(criterions){
-        const workers = myClient.query(`SELECT * FROM workers WHERE ${key} ${criteria} ${value};`);
+    async getByID(data){
+        const client = new Client(connection);
+        await client.connect()
+        const workers = await client.query(`SELECT * FROM workers WHERE idworker = '${data.idworker}';`);
         
-        myClient.end();
+        await client.end();
         return workers;
     }
 
     //Create a new Worker
-    createNew(){
-        const {name_description, foto, historial} = req.body
+    async createNew(data){
+        const client = new Client(connection);
+        await client.connect()
         
-        let newWorker = myClient.query(`INSERT INTO workers (name_description, foto, historial) VALUE (${name_description}, ${foto}, ${historial});`)
+        let newWorker = await client.query(`INSERT INTO workers (name_description, photo, record) VALUE ('${data.name_description}', '${data.photo}', '${data.record}');`)
 
-        myClient.end()
+        await client.end()
         return newWorker
-      };
+        };
 
-    mod(){
-        const modComp = myClient.query(`UPDATE workers SET 
-            name_description = ${name_description}, 
-            foto = ${foto}, 
-            historial = ${historial}`)
+        
+    async mod(){
+        const client = new Client(connection);
+        client.connect()
 
-        myClient.end()
+        const modComp = client.query(`UPDATE workers SET 
+            name_description = '${name_description}', 
+            photo = '${data.photo}', 
+            record = '${data.record}';`);
+
+        client.end()
         return modComp
     };
 
-    delete(){
-        const deleteWorker = myClient.query(`DELETE FROM workers WHERE idcompany = ${idcompany} AND idworker= ${idworker} ;`)
-      
-        myClient.end()
+    async delete(){
+        const client = new Client(connection);
+        client.connect()
+
+        const deleteWorker = client.query(`DELETE FROM workers WHERE idcompany = '${idcompany}' AND idworker= '${idworker}' ;`)
+    
+        client.end()
         return deleteWorker
     };
 
 }
 
-let criterions = {criteria: `${criteria}`,
-key: `${key}`,
-value: `${value}`,
-nextConcat: `${nextConcat}`} 
+
+module.exports = workersManager

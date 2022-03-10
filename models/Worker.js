@@ -2,14 +2,14 @@ class Workers{
     #idcompany
     #idworker
     #name_description
-    #foto
-    #historial
+    #photo
+    #record
     constructor(props){
         this.#idcompany = props.idcompany
         this.#idworker = props.idworker
         this.#name_description = props.name_description;
-        this.#foto = props.foto;
-        this.#historial = props.historial;
+        this.#photo = props.photo;
+        this.#record = props.record;
     }
 
     get idcompany(){
@@ -37,23 +37,23 @@ class Workers{
     }
 
     
-    get foto() {
-        return this.#foto;
+    get photo() {
+        return this.#photo;
     }
 
-    set foto(newFoto) {
-        this.#foto = newfoto;
+    set photo(newPhoto) {
+        this.#photo = newPhoto;
     }
 
-    get historial() {
-        return this.#historial;
+    get record() {
+        return this.#record;
     }
 
-    set historial(newHis) {
-        this.#historial = newHis;
+    set record(newRecord) {
+        this.#record = newRecord;
     }
 
 }
 
 
-export default Worker
+module.exports = Workers

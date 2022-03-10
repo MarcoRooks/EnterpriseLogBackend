@@ -1,58 +1,67 @@
-/* import client from "../managers/connection.js";
-import Company from "../models/Company" */
-const client = require("../managers/connection.js");
-const Company = require("../models/Company");
+const {Client} = require("pg");
+const connection = requiere("../managers/connection.js")
+const Company = require("../models/Company.js");
 
 
 
 class companiesManager{
-    
-    getAll(){
-        const companies = client.query("SELECT * FROM companies;");
-        newCompanies = companies.map((company) => new Company(company));
-        client.end();
-        return newCompanies;
-      }
-
-    getByID(){
-        const companies = client.query(`SELECT * FROM companies WHERE idcompany = ${idcompany};`);
-
-        client.end()
-        return newCompanies;
+  async getAll(){
+      const client = new Client(connection);
+      await client.connect()
+      const companies = await client.query("SELECT * FROM companies;");
+      newCompanies = companies.map((company) => new Company(company));
+      await client.end();
+      return newCompanies;
     }
 
-    createNew(){
-      const {name_description, sector, creation_date, logo, webpage, phone_number, social_media, company_value, num_employees, images} = req.body
+  async getByID(idcompany){
+    const client = new Client(connection);
+    await client.connect()
+    const companies = await client.query(`SELECT * FROM companies WHERE idcompany = '${idcompany}';`);
 
-      const newComp = client.query(`INSERT INTO companies (name_description, sector, creation_date, logo, webpage, phone_number, social_media, company_value, num_employees, images) VALUE (${name_description}, ${sector}, ${creation_date}, ${logo}, ${webpage}, ${phone_number}, ${social_media}, ${company_value}, ${num_employees}, ${images});`);
+    await client.end()
+    return companies;
+  }
 
-      client.end()
-      return newComp
-    }
+  async createNew(data){
+    const client = new Client(connection);
+    await client.connect()
 
-    delete(){
-      const deleteComp = client.query(`DELETE FROM companies WHERE idcompany = ${idcompany} ;`)
+    const newComp = await client.query(`INSERT INTO companies (name_description, sector, creation_date, logo, webpage, phone_number, social_media, company_value, num_employees, images) VALUE ('${data.name_description}', '${data.sector}', '${data.creation_date}', '${data.logo}', '${data.webpage}', '${data.phone_number}', '${data.social_media}', '${data.company_value}', '${data.num_employees}', '${data.images}');`);
 
-      client.end()
-      return deleteComp
+    await client.end()
+    return newComp
+  }
 
-    }
+  async deleteByID(idcompany){
+    const client = new Client(connection);
+    await client.connect()
+    const deleteComp = await client.query(`DELETE FROM companies WHERE idcompany = '${idcompany}' ;`)
 
-    mod(){
-      const modComp = client.query(`UPDATE companies SET 
-        name_description = ${name_description}, 
-        sector = ${sector}, 
-        creation_date = ${creation_date}, 
-        logo = ${logo}, 
-        webpage = ${webpage}, 
-        phone_number = ${phone_number}, 
-        social_media = ${social_media}, 
-        company_value = ${company_value}, 
-        num_employees = ${num_employees}, 
-        images = ${images}`)
-        
-        client.end()
-        return modComp;
-    }
+    await client.end()
+    return deleteComp
+
+  }
+
+  async mod(data){
+    const client = new Client(connection);
+    await client.connect()
+    const modComp = await client.query(`UPDATE companies SET 
+      name_description = '${data.name_description}', 
+      sector = '${data.sector}', 
+      creation_date = '${data.creation_date}', 
+      logo = '${data.logo}', 
+      webpage = '${data.webpage}', 
+      phone_number = '${data.phone_number}', 
+      social_media = '${data.social_media}', 
+      company_value = '${data.company_value}', 
+      num_employees = '${data.num_employees}', 
+      images = '${data.images}' ;`)
+      
+    await client.end()
+    return modComp;
+  }
 
 }
+
+module.exports = companiesManager
