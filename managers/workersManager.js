@@ -5,7 +5,7 @@ const Workers = require('../models/Worker');
 class workersManager{
     
     //brings forward all the workers in the table
-    async getAll(){
+    static async getAll(){
         const client = new Client(connection);
         await client.connect()
         const workers = await client.query("SELECT * FROM workers;");
@@ -15,7 +15,7 @@ class workersManager{
     };
 
     //Brigns workers with one condition
-    async getByID(data){
+    static async getByID(data){
         const client = new Client(connection);
         await client.connect()
         const workers = await client.query(`SELECT * FROM workers WHERE idworker = '${data.idworker}';`);
@@ -25,7 +25,7 @@ class workersManager{
     }
 
     //Create a new Worker
-    async createNew(data){
+    static async createNew(data){
         const client = new Client(connection);
         await client.connect()
         
@@ -36,7 +36,7 @@ class workersManager{
         };
 
         
-    async mod(){
+    static async mod(){
         const client = new Client(connection);
         client.connect()
 
@@ -49,7 +49,7 @@ class workersManager{
         return modComp
     };
 
-    async delete(){
+    static async delete(){
         const client = new Client(connection);
         client.connect()
 

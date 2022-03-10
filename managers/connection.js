@@ -1,24 +1,14 @@
-/* const { Client } = require('pg') */
 
-
-/* try { */
 const connectionData = {
-    user: USER,
-    host: HOST,
-    database: DATABASE,
-    password: PASSWORD,
-    port: PORT,
+    user: process.env.USER,
+    host: process.env.HOST,
+    database: process.env.DATABASE,
+    password: process.env.PASSWORD,
+    port: process.env.PORT,
 }
 
-    /* const myClient = new Client(connectionData)
-    myClient.connect();
-    console.log(" active"); */
-        
-/* } catch (error) {
-    console.log(error)
-}
-let i = ppppp() */
+  
 
-module.exports = connectionData
+module.exports = connectionData;
 
 

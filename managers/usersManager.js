@@ -6,7 +6,7 @@ const User = require('../models/User.js')
 
 class usersManager{
 
-  async getAll(){
+  static async getAll(){
     const client = new Client(connection);
     await client.connect()
     const users = await client.query("SELECT * FROM users;");
@@ -15,14 +15,14 @@ class usersManager{
     return newUsers;
   }
 
-  async getUser(data){
+  static async getUser(data){
     const client = new Client(connection);
     await client.connect()
     const user = await client.query(`SELECT * FROM users WHERE iduser = '${data.iduser}'`)
   }
 
   //Esta ingresando username y userpass
-  async getByLogin(data){
+  static async getByLogin(data){
     const client = new Client(connection);
     await client.connect()
 
@@ -33,7 +33,7 @@ class usersManager{
   }
 
   //Dar alta de Nuevo Usuario
-  async createUser(data){
+  static async createUser(data){
     const client = new Client(connection);
     await client.connect()
     
@@ -43,7 +43,7 @@ class usersManager{
     return newUser
   }
 
-  async mod(data){
+  static async mod(data){
     const client = new Client(connection);
     await client.connect()
     const modUser = await client.query(`UPDATE users SET 
