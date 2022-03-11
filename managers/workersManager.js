@@ -1,4 +1,4 @@
-const {Client} = require('pg');
+const { Client } = require('pg');
 const connection = require('../managers/connection');
 const Workers = require('../models/Worker');
 
@@ -44,7 +44,7 @@ class workersManager{
         await client.connect()
         
         try{
-            let newWorker = await client.query(`INSERT INTO workers (name_description, photo, record) VALUE ('${data.name_description}', '${data.photo}', '${data.record}');`);
+            let newWorker = await client.query(`INSERT INTO workers (name_description, photo, record) VALUES ('${data.name_description}', '${data.photo}', '${data.record}');`);
             return newWorker;
         } catch (e) {
             return false;
@@ -55,13 +55,13 @@ class workersManager{
         };
 
         
-    static async mod(){
+    static async mod(data){
         const client = new Client(connection);
         client.connect()
 
         try{
             const modComp = client.query(`UPDATE workers SET 
-                name_description = '${name_description}', 
+                name_description = '${data.name_description}', 
                 photo = '${data.photo}', 
                 record = '${data.record}';`);
             return modComp;
@@ -73,12 +73,12 @@ class workersManager{
         
     };
 
-    static async delete(){
+    static async delete(data){
         const client = new Client(connection);
         client.connect()
 
         try{
-            const deleteWorker = client.query(`DELETE FROM workers WHERE idcompany = '${idcompany}' AND idworker= '${idworker}' ;`);
+            const deleteWorker = client.query(`DELETE FROM workers WHERE idcompany = '${data.idcompany}' AND idworker= '${data.idworker}' ;`);
             return deleteWorker;
         } catch (e) {
             return false;

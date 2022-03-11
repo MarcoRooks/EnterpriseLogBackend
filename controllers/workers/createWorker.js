@@ -1,7 +1,7 @@
 const workersManager = require('../../managers/workersManager');
 
 function createWorker(req, res) {
-    const created = workersManager.createNew()
+    const created = workersManager.createNew(req.body)
 
     if (created == false){
         res.status(204).json("Petition not found")

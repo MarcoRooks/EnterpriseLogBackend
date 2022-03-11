@@ -1,4 +1,4 @@
-const {Client} = require("pg")
+const { Client } = require("pg")
 const connection = require('../managers/connection')
 const User = require('../models/User.js')
 
@@ -57,18 +57,23 @@ class usersManager {
 
   //Dar alta de Nuevo Usuario
   static async createUser(data){
+    console.log("Data entrada:", data)
+    console.log(connection)
+
     const client = new Client(connection);
     await client.connect()
+      
     
     try{
-      let newUser = await client.query(`INSERT INTO users (username, email, userpass) VALUE ('${data.username}', '${data.email}', '${data.userpass}');`);
+      let newUser = await client.query(`INSERT INTO users (username, email, userpass) VALUES ('${data.username}', '${data.email}', '${data.userpass}');`);
       return newUser
     } catch (e) {
+      console.log("ERROR PRESENTED:",e)
       return false;
     } finally {
       await client.end()
     }
-  
+
   }
 
   static async mod(data){

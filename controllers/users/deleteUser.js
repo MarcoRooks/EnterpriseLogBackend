@@ -1,7 +1,7 @@
 const usersManager = require('../../managers/usersManager');
 
 function deleteUser(req, res) {
-    const deleted = usersManager.deleteUser()
+    const deleted = usersManager.deleteUser(req.query.id)
 
     if (deleted == false){
         res.status(204).json("Petition not found");

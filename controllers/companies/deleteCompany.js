@@ -1,7 +1,7 @@
 const companiesManager = require('../../managers/companiesManager');
 
 function deleteCompany(req, res) {
-    const deleted =companiesManager.delete()
+    const deleted =companiesManager.delete(req.query.id)
 
     if (deleted == false){
         res.status(204).json("Petition failed")

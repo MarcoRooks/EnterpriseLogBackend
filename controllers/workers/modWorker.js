@@ -1,7 +1,7 @@
 const workersManager = require('../../managers/workersManager');
 
 function modWorker(req, res) {
-    const modified = workersManager.mod();
+    const modified = workersManager.mod(req.body);
 
     if (modified == false) {
         res.status(204).json("Petition not found")

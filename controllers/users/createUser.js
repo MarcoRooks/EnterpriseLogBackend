@@ -1,7 +1,8 @@
 const usersManager = require('../../managers/usersManager');
 
-function createUser(req, res) {
-    const created = usersManager.createUser();
+async function createUser(req, res) {
+
+    const created = await usersManager.createUser(req.body);
 
     if(created == false){
         res.json(204).json("Petition not found")

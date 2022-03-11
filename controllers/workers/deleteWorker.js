@@ -1,7 +1,7 @@
 const workersManager = require('../../managers/workersManager');
 
 function deleteWorker(req, res) {
-    const deleted = workersManager.delete()
+    const deleted = workersManager.delete(req.param.id)
 
     if (deleted == false) {
         res.status(204).json("Petition not found")

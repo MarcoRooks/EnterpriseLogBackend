@@ -2,12 +2,12 @@ const usersManager = require('../../managers/usersManager');
 
 
 function modUser(req, res) {
-    const modified = usersManager.mod()
+    const modified = usersManager.mod(req.body)
 
     if (modified == false) {
         res.status(204).json("Petition not found");
     } else {
-        res.status(200).json("Modified User")
+        res.status(200).json("Modified User");
     }
      
 }

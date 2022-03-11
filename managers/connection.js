@@ -1,10 +1,10 @@
 
 const connectionData = {
-    user: process.env.USER,
-    host: process.env.HOST,
-    database: process.env.DATABASE,
-    password: process.env.PASSWORD,
-    port: process.env.PORT,
+    user: "postgres",
+    host: "localhost",
+    database: "enterprise",
+    password: "1234",
+    port: 5432,
 }
 
   

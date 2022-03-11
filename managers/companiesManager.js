@@ -1,5 +1,5 @@
 const { Client } = require("pg");
-const Connection = require("./connection.js");
+const connection = require("./connection.js");
 const Company = require("../models/Company.js");
 
 
@@ -7,13 +7,12 @@ const Company = require("../models/Company.js");
 class companiesManager{
   static async getAll(){
 
-      const client = new Client(Connection);
-      await client.connect();
+      const client = new Client(connection);
+      await client.connect();   
 
       try{
         const companies = await client.query("SELECT * FROM companies;");
-        let newCompanies = companies.map((company) => new Company(company));
-        return newCompanies;
+        return companies;
       } catch(e) {
         return false;
       } finally {
@@ -24,7 +23,7 @@ class companiesManager{
 
   static async getByID(idcompany){
 
-    const client = new Client(Connection);
+    const client = new Client(connection);
     await client.connect();
 
     try{
@@ -40,13 +39,14 @@ class companiesManager{
 
   static async createNew(data){
 
-    const client = new Client(Connection);
+    const client = new Client(connection);
     await client.connect()
 
     try{
-      const newComp = await client.query(`INSERT INTO companies (name_description, sector, creation_date, logo, webpage, phone_number, social_media, company_value, num_employees, images) VALUE ('${data.name_description}', '${data.sector}', '${data.creation_date}', '${data.logo}', '${data.webpage}', '${data.phone_number}', '${data.social_media}', '${data.company_value}', '${data.num_employees}', '${data.images}');`);
+      const newComp = await client.query(`INSERT INTO companies (name_description, sector, creation_date, logo, webpage, phone_number, social_media, company_value, num_employees, images) VALUES ('${data.name_description}', '${data.sector}', '${data.creation_date}', '${data.logo}', '${data.webpage}', '${data.phone_number}', '${data.social_media}', '${data.company_value}', '${data.num_employees}', '${data.images}');`);
       return newComp
     } catch (e) {
+      console.log("falla", e)
        return false;
     } finally {
       await client.end();
@@ -56,7 +56,7 @@ class companiesManager{
 
   static async deleteByID(idcompany){
 
-    const client = new Client(Connection);
+    const client = new Client(connection);
     await client.connect();
 
     try{
@@ -72,7 +72,7 @@ class companiesManager{
 
   static async mod(data){
 
-    const client = new Client(Connection);
+    const client = new Client(connection);
     await client.connect();
 
     try{
