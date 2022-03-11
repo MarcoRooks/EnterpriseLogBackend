@@ -7,8 +7,7 @@ function deleteUser(req, res) {
         res.status(204).json("Petition not found");
     }else{
         res.status(200).json("Deleted user");
-    }
-    
+    }    
 }
 
 module.exports = deleteUser

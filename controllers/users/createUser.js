@@ -6,7 +6,7 @@ function createUser(req, res) {
     if(created == false){
         res.json(204).json("Petition not found")
     }else{
-        res.status(200).json("User created")
+        res.status(201).json("User created")
     }
 }
 

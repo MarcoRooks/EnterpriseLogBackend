@@ -53,7 +53,6 @@ class usersManager{
     await client.end()
     return modUser
   }
-
 }
 
 module.exports = usersManager
