@@ -1,8 +1,14 @@
 const workersManager = require('../../managers/workersManager');
 
 function getWorker(req, res) {
-    workersManager.getByID()
-    res.status(200).json("Get worker")
+    const worker = workersManager.getByID(req.query.id)
+
+    if (worker == false) {
+        res.status(204).json("Petition not found")
+    } else {
+        res.status(200).json(worker)
+    }
+    
 }
 
 module.exports = getWorker

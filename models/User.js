@@ -6,6 +6,7 @@ class User {
     #userEmail;
     #name_description;
     #avatar;
+    #time_modification;
 
     constructor(props) {
         this.#iduser = this.props; 
@@ -14,6 +15,7 @@ class User {
         this.#userEmail = this.props;
         this.#name_description = this.props;
         this.#avatar = this.props;
+        this.#time_modification = this.props;
     }
 
     get iduser() {
@@ -62,6 +64,14 @@ class User {
 
     set avatar(newAvatar) {
         this.#avatar = newAvatar;
+    }
+
+    get time_modification() {
+        return this.#time_modification;
+    }
+
+    set time_modification (newTime) {
+        this.#time_modification = newTime;
     }
 
 }

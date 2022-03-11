@@ -1,8 +1,13 @@
 const companiesManager = require('../../managers/companiesManager');
 
 function deleteCompany(req, res) {
-    companiesManager.delete()
-    res.status(200).json("delete company")
+    const deleted =companiesManager.delete(req.query.id)
+
+    if (deleted == false){
+        res.status(204).json("Petition failed")
+    }else{
+        res.status(200).json("Company has been deleted")
+    }   
 }
 
 module.exports = deleteCompany

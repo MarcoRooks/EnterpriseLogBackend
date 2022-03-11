@@ -12,6 +12,7 @@ class Company{
     #company_value
     #num_employees
     #images
+    #time_modification
     
     constructor(props){
         this.#idcompany = props.idcompany;
@@ -134,4 +135,14 @@ class Company{
         this.#images = newImage;
     }
 
+    get time_modification() {
+        return this.#time_modification;
+    }
+
+    set time_modification (newTime) {
+        this.#time_modification = newTime;
+    }
+
 }
+
+module.exports = Company

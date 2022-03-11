@@ -1,8 +1,14 @@
 const companiesManager = require('../../managers/companiesManager');
 
-function getAllCompany(req, res) {
-    companiesManager.getAll()
-    res.status(200).json("Get All company")
+async function getAllCompany(req, res) {
+    //console.log(companiesManager)
+    const bringAll = await companiesManager.getAll()
+
+    if (bringAll == false) {
+        res.status(204).json("Petition failed")
+    }else{
+        res.status(200).json(bringAll);
+    }   
 }
 
 module.exports = getAllCompany;

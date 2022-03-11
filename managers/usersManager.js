@@ -1,72 +1,97 @@
-const myClient = require('../managers/connection')
+const { Client } = require("pg")
+const connection = require('../managers/connection')
 const User = require('../models/User.js')
 
-/* import myClient from "../managers/connection"; */
-/* import  User from "../models/User.js" */
+
 
 class usersManager {
 
-  getAll() {
-    try {
-      const users = myClient.query("SELECT * FROM Users;");
+  static async getAll(){
+
+    const client = new Client(connection);
+    await client.connect();
+
+    try{
+      const users = await client.query("SELECT * FROM users;");
       newUsers = users.map((user) => new User(user));
       return newUsers;
     } catch (e) {
-      return false
+      return false;
     } finally {
-      myClient.end();
+      await client.end();
     }
+  }
+
+  static async getUser(data){
+
+    const client = new Client(connection);
+    await client.connect()
+
+    try{
+      const user = await client.query(`SELECT * FROM users WHERE iduser = '${data.iduser}'`);
+      return user;
+    } catch(e) {
+      return false;
+    } finally {
+      await client.end()
+    }
+    
   }
 
   //Esta ingresando username y userpass
-  getByLogin() {
+  static async getByLogin(data){
+
+    const client = new Client(connection);
+    await client.connect();
+    
     try {
-      let criterions = {
-        criteria: `${criteria}`,
-        key: `username`,
-        value: req.params.username,
-        nextConcat: `AND`,
-        key2: `userpass`,
-        value2: req.params.userpass
-      };
-      const users = myClient.query(`SELECT * FROM Users WHERE 
-      ${criterions.key} ${criterions.criteria} 
-      ${criterions.value} ${criterions.nextConcat} 
-      ${criterions.key2} ${criterions.criteria} ${criterions.value2};`);
+      const users = await client.query(`SELECT * FROM users WHERE username = '${data.username}' AND userpass = '${data.userpass}';`);
       return users;
-    } catch (e) {
+    } catch(e) {
       return false;
     } finally {
-      myClient.end();
+      await client.end();
     }
-
+    
   }
 
   //Dar alta de Nuevo Usuario
-  createUser() {
-    try {
-      const { username, email, userpass } = req.body
-      let newUser = myClient.query(`INSERT INTO users (username, email, userpass) VALUE (${username}, ${email}, ${userpass});`)
+  static async createUser(data){
+    console.log("Data entrada:", data)
+    console.log(connection)
+
+    const client = new Client(connection);
+    await client.connect()
+      
+    
+    try{
+      let newUser = await client.query(`INSERT INTO users (username, email, userpass) VALUES ('${data.username}', '${data.email}', '${data.userpass}');`);
       return newUser
     } catch (e) {
-      return false
+      console.log("ERROR PRESENTED:",e)
+      return false;
     } finally {
-      myClient.end()
+      await client.end()
     }
+
   }
 
-  mod() {
-    try {
-      const modUser = myClient.query(`UPDATE workers SET 
-      name_description = ${name_description}, 
-      foto = ${foto}, 
-      historial = ${historial}`)
-      return modUser
-    } catch (e) {
-      return false
+  static async mod(data){
+
+    const client = new Client(connection);
+    await client.connect()
+
+    try{
+      const modUser = await client.query(`UPDATE users SET 
+        name_description = '${data.name_description}', 
+        avatar = '${data.avatar}' ;`);
+      return modUser;
+    } catch(e) {
+      return false;
     } finally {
-      myClient.end()
+      await client.end()
     }
+    
   }
 }
 
