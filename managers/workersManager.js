@@ -6,22 +6,36 @@ class workersManager{
     
     //brings forward all the workers in the table
     static async getAll(){
+
         const client = new Client(connection);
         await client.connect()
-        const workers = await client.query("SELECT * FROM workers;");
-        newWorkers = workers.map((worker) => new Workers(worker));
-        await client.end();
-        return newWorkers;
+
+        try{
+            const workers = await client.query("SELECT * FROM workers;");
+            newWorkers = workers.map((worker) => new Workers(worker));
+            return newWorkers;
+        } catch (e) {
+            return false;
+        } finally {
+            await client.end();
+        }
+        
     };
 
     //Brigns workers with one condition
     static async getByID(data){
         const client = new Client(connection);
         await client.connect()
-        const workers = await client.query(`SELECT * FROM workers WHERE idworker = '${data.idworker}';`);
+
+        try{
+            const workers = await client.query(`SELECT * FROM workers WHERE idworker = '${data.idworker}';`);
+            return workers;
+        } catch (e) {
+            return false;
+        } finally {
+            await client.end();
+        }
         
-        await client.end();
-        return workers;
     }
 
     //Create a new Worker
@@ -29,10 +43,15 @@ class workersManager{
         const client = new Client(connection);
         await client.connect()
         
-        let newWorker = await client.query(`INSERT INTO workers (name_description, photo, record) VALUE ('${data.name_description}', '${data.photo}', '${data.record}');`)
-
-        await client.end()
-        return newWorker
+        try{
+            let newWorker = await client.query(`INSERT INTO workers (name_description, photo, record) VALUE ('${data.name_description}', '${data.photo}', '${data.record}');`);
+            return newWorker;
+        } catch (e) {
+            return false;
+        } finally {
+            await client.end();
+        }
+        
         };
 
         
@@ -40,23 +59,33 @@ class workersManager{
         const client = new Client(connection);
         client.connect()
 
-        const modComp = client.query(`UPDATE workers SET 
-            name_description = '${name_description}', 
-            photo = '${data.photo}', 
-            record = '${data.record}';`);
-
-        client.end()
-        return modComp
+        try{
+            const modComp = client.query(`UPDATE workers SET 
+                name_description = '${name_description}', 
+                photo = '${data.photo}', 
+                record = '${data.record}';`);
+            return modComp;
+        } catch (e) {
+            return false;
+        } finally {
+            await client.end();
+        }
+        
     };
 
     static async delete(){
         const client = new Client(connection);
         client.connect()
 
-        const deleteWorker = client.query(`DELETE FROM workers WHERE idcompany = '${idcompany}' AND idworker= '${idworker}' ;`)
-    
-        client.end()
-        return deleteWorker
+        try{
+            const deleteWorker = client.query(`DELETE FROM workers WHERE idcompany = '${idcompany}' AND idworker= '${idworker}' ;`);
+            return deleteWorker;
+        } catch (e) {
+            return false;
+        } finally {
+            await client.end();
+        }
+        
     };
 
 }

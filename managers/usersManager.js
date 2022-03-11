@@ -4,32 +4,55 @@ const User = require('../models/User.js')
 
 
 
-class usersManager{
+class usersManager {
 
   static async getAll(){
+
     const client = new Client(connection);
-    await client.connect()
-    const users = await client.query("SELECT * FROM users;");
-    newUsers = users.map((user) => new User(user));
-    await client.end();
-    return newUsers;
+    await client.connect();
+
+    try{
+      const users = await client.query("SELECT * FROM users;");
+      newUsers = users.map((user) => new User(user));
+      return newUsers;
+    } catch (e) {
+      return false;
+    } finally {
+      await client.end();
+    }
   }
 
   static async getUser(data){
+
     const client = new Client(connection);
     await client.connect()
-    const user = await client.query(`SELECT * FROM users WHERE iduser = '${data.iduser}'`)
+
+    try{
+      const user = await client.query(`SELECT * FROM users WHERE iduser = '${data.iduser}'`);
+      return user;
+    } catch(e) {
+      return false;
+    } finally {
+      await client.end()
+    }
+    
   }
 
   //Esta ingresando username y userpass
   static async getByLogin(data){
-    const client = new Client(connection);
-    await client.connect()
 
-    const users = await client.query(`SELECT * FROM users WHERE username = '${data.username}' AND userpass = '${data.userpass}';`);
+    const client = new Client(connection);
+    await client.connect();
     
-    await client.end();
-    return users;
+    try {
+      const users = await client.query(`SELECT * FROM users WHERE username = '${data.username}' AND userpass = '${data.userpass}';`);
+      return users;
+    } catch(e) {
+      return false;
+    } finally {
+      await client.end();
+    }
+    
   }
 
   //Dar alta de Nuevo Usuario
@@ -37,21 +60,33 @@ class usersManager{
     const client = new Client(connection);
     await client.connect()
     
-    let newUser = await client.query(`INSERT INTO users (username, email, userpass) VALUE ('${data.username}', '${data.email}', '${data.userpass}');`)
-
-    await client.end()
-    return newUser
+    try{
+      let newUser = await client.query(`INSERT INTO users (username, email, userpass) VALUE ('${data.username}', '${data.email}', '${data.userpass}');`);
+      return newUser
+    } catch (e) {
+      return false;
+    } finally {
+      await client.end()
+    }
+  
   }
 
   static async mod(data){
+
     const client = new Client(connection);
     await client.connect()
-    const modUser = await client.query(`UPDATE users SET 
-        name_description = '${data.name_description}', 
-        avatar = '${data.avatar}' ;`)
 
-    await client.end()
-    return modUser
+    try{
+      const modUser = await client.query(`UPDATE users SET 
+        name_description = '${data.name_description}', 
+        avatar = '${data.avatar}' ;`);
+      return modUser;
+    } catch(e) {
+      return false;
+    } finally {
+      await client.end()
+    }
+    
   }
 }
 
