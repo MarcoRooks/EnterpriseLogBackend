@@ -1,17 +1,17 @@
 const { Client } = require("pg")
-const connection = require('../managers/connection')
-const User = require('../models/User.js')
+const connection = require('../managers/connection');
+const User = require("../models/User.js");
 
 
 
 class usersManager {
 
-  static async getAll(){
+  static async getAll() {
 
     const client = new Client(connection);
     await client.connect();
 
-    try{
+    try {
       const users = await client.query("SELECT * FROM users;");
       newUsers = users.map((user) => new User(user));
       return newUsers;
@@ -22,53 +22,52 @@ class usersManager {
     }
   }
 
-  static async getUser(data){
+  static async getUser(data) {
 
     const client = new Client(connection);
     await client.connect()
 
-    try{
+    try {
       const user = await client.query(`SELECT * FROM users WHERE iduser = '${data.iduser}'`);
       return user;
-    } catch(e) {
+    } catch (e) {
       return false;
     } finally {
       await client.end()
     }
-    
+
   }
 
   //Esta ingresando username y userpass
-  static async getByLogin(data){
+  static async getByLogin(data) {
 
     const client = new Client(connection);
     await client.connect();
-    
+
     try {
       const users = await client.query(`SELECT * FROM users WHERE username = '${data.username}' AND userpass = '${data.userpass}';`);
       return users;
-    } catch(e) {
+    } catch (e) {
       return false;
     } finally {
       await client.end();
     }
-    
+
   }
 
   //Dar alta de Nuevo Usuario
-  static async createUser(data){
-    console.log("Data entrada:", data)
-    console.log(connection)
+  static async createUser(data) {
 
     const client = new Client(connection);
     await client.connect()
-      
-    
-    try{
-      let newUser = await client.query(`INSERT INTO users (username, email, userpass) VALUES ('${data.username}', '${data.email}', '${data.userpass}');`);
-      return newUser
+
+    const user = new User(data);
+
+    try {
+      let newUser = await client.query(`INSERT INTO users (iduser, name_description, email, avatar, username, userpass) VALUES ('${user.iduser}', '${user.name_description}', '${user.userEmail}', '${user.avatar}', '${user.userName}', '${user.userPass}');`);
+      return user
     } catch (e) {
-      console.log("ERROR PRESENTED:",e)
+      console.log("ERROR PRESENTED:", e)
       return false;
     } finally {
       await client.end()
@@ -76,22 +75,22 @@ class usersManager {
 
   }
 
-  static async mod(data){
+  static async mod(data) {
 
     const client = new Client(connection);
     await client.connect()
 
-    try{
+    try {
       const modUser = await client.query(`UPDATE users SET 
         name_description = '${data.name_description}', 
         avatar = '${data.avatar}' ;`);
       return modUser;
-    } catch(e) {
+    } catch (e) {
       return false;
     } finally {
       await client.end()
     }
-    
+
   }
 }
 

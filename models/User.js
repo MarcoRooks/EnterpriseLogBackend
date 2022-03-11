@@ -77,6 +77,10 @@ class User {
         this.#time_modification = newTime;
     }
 
+    toString() {
+        return this.#iduser + " " + this.#userName + " " + this.#userPass
+    }
+
 }
 
 
