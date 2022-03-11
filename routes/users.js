@@ -10,7 +10,7 @@ router.get('/:id', require('../controllers/users/getUser'));
 router.post('/create', require('../controllers/users/createUser'));
 
 //Modifica un usuario
-router.patch('/mod/:id' , require('../controllers/users/modUser'));
+router.patch('/mod/:id', require('../controllers/users/modUser'));
 
 //Borrar usuario
 router.delete('/:id', require('../controllers/users/deleteUser'));

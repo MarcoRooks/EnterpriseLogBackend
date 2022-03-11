@@ -1,5 +1,6 @@
-class User {
+const { v4: uuidv4 } = require("uuid");
 
+class User {
     #iduser;
     #userName;
     #userPass;
@@ -8,14 +9,16 @@ class User {
     #avatar;
     #time_modification;
 
+    #mockDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+    #mockLogo = "https://www.latercera.com/resizer/ZwYtLBDucTx2GhRF45twlp7Ikxs=/375x250/smart/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/IWE35XK3SFCNBGJYGC65NCEONA.jpg"
+
     constructor(props) {
-        this.#iduser = this.props; 
-        this.#userName = this.props;
-        this.#userPass = this.props;
-        this.#userEmail = this.props;
-        this.#name_description = this.props;
-        this.#avatar = this.props;
-        this.#time_modification = this.props;
+        this.#iduser = uuidv4();;
+        this.#userName = props.userName;
+        this.#userPass = props.userPass;
+        this.#userEmail = props.userEmail;
+        this.#name_description = this.#mockDescription;
+        this.#avatar = this.#mockLogo;
     }
 
     get iduser() {
@@ -70,7 +73,7 @@ class User {
         return this.#time_modification;
     }
 
-    set time_modification (newTime) {
+    set time_modification(newTime) {
         this.#time_modification = newTime;
     }
 
