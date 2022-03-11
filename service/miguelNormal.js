@@ -24,7 +24,9 @@ function between(min, max) {
 async function insertUser(rows=10) {
     for (let j = 0; j < rows; j++) {
         let newUser = new User();
-        const insert = `INSERT INTO users (name_description, email, avatar, username, userpass) VALUES ('${newUser.name_description}', '${newUser.userEmail}', '${newUser.avatar}', '${newUser.userName}', ${newUser.userPass});`
+        const newPass = async (userPass) => { return md5(userPass)};
+        const pass = await newPass(newUser.userPass);
+        const insert = `INSERT INTO users (name_description, email, avatar, username, userpass) VALUES ('${newUser.name_description}', '${newUser.userEmail}', '${newUser.avatar}', '${newUser.userName}', ${pass});`
         await client.query(insert);
     }
 }
@@ -67,9 +69,9 @@ async function closed(){
 }
 
 async function dataLoad() {
-    //await insertUser();
-    //const idUser = await selectUser();
-    //await insertCompany(idUser);
+    await insertUser();
+    const idUser = await selectUser();
+    await insertCompany(idUser);
     const idCompany = await selectCompany();
     await insertWorkers(idCompany);
     await closed();
