@@ -1,4 +1,6 @@
-class Company{
+const { v4: uuidv4 } = require("uuid");
+
+class Company {
     #idcompany
     #iduser
     #name_description
@@ -13,14 +15,14 @@ class Company{
     #num_employees
     #images
     #time_modification
-    
-    constructor(props){
-        this.#idcompany = props.idcompany;
+
+    constructor(props) {
+        this.#idcompany = props.idcompany || uuidv4();
         this.#iduser = props.iduser;
         this.#name_description = props.name_description;
         this.#sector = props.sector;
         this.#creation_date = props.creation_date;
-        this.#logo = props.logo; 
+        this.#logo = props.logo;
         this.#webpage = props.webpage;
         this.#phone_number = props.phone_number;
         this.#social_media = props.social_media;
@@ -31,7 +33,7 @@ class Company{
         this.#time_modification = props.time_modification;
     }
 
-    get idcompany(){
+    get idcompany() {
         return this.#idcompany;
     }
 
@@ -79,7 +81,7 @@ class Company{
         this.#logo = newLogo;
     }
 
-    get webpage(){
+    get webpage() {
         return this.#webpage
     }
 
@@ -139,7 +141,7 @@ class Company{
         return this.#time_modification;
     }
 
-    set time_modification (newTime) {
+    set time_modification(newTime) {
         this.#time_modification = newTime;
     }
 

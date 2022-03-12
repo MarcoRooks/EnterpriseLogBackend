@@ -13,12 +13,12 @@ class User {
     #mockLogo = "https://www.latercera.com/resizer/ZwYtLBDucTx2GhRF45twlp7Ikxs=/375x250/smart/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/IWE35XK3SFCNBGJYGC65NCEONA.jpg"
 
     constructor(props) {
-        this.#iduser = uuidv4();;
-        this.#userName = props.userName;
-        this.#userPass = props.userPass;
-        this.#userEmail = props.userEmail;
-        this.#name_description = this.#mockDescription;
-        this.#avatar = this.#mockLogo;
+        this.#iduser = props.iduser || uuidv4();
+        this.#userName = props.username;
+        this.#userPass = props.userpass;
+        this.#userEmail = props.email;
+        this.#name_description = props.name_description || this.#mockDescription;
+        this.#avatar = props.avatar || this.#mockLogo;
     }
 
     get iduser() {

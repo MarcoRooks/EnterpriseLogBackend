@@ -45,8 +45,10 @@ class usersManager {
     await client.connect();
 
     try {
-      const users = await client.query(`SELECT * FROM users WHERE username = '${data.username}' AND userpass = '${data.userpass}';`);
-      return users;
+      const users = await client.query(`SELECT * FROM users WHERE email = '${data.email}' AND userpass = '${data.userpass}';`);
+      console.log(users.rows[0].username)
+      const theUser = new User(users.rows[0]);
+      return theUser;
     } catch (e) {
       return false;
     } finally {
