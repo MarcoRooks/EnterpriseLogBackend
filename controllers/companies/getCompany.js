@@ -1,14 +1,14 @@
 const companiesManager = require('../../managers/companiesManager');
 
-function getCompany(req, res) {
-    const company = companiesManager.getByID(req.query.id);
+async function getCompany(req, res) {
+    const company = await companiesManager.getByID(req.params.id);
 
     if (company == false) {
         res.status(204).json("Company not found")
-    }else {
+    } else {
         res.status(200).json(company);
     }
-    
+
 }
 
 module.exports = getCompany

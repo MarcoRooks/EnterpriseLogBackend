@@ -1,4 +1,8 @@
 var app = require('express')();
+const cors = require("cors");
+
+app.use(cors());
+
 port = 3000;
 
 app.use(require('express').json());
