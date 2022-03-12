@@ -1,7 +1,6 @@
 const companiesManager = require('../../managers/companiesManager');
 
 async function getCompany(req, res) {
-    console.log(req.params.id)
     const company = await companiesManager.getByID(req.params.id);
 
     if (company == false) {

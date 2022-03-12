@@ -22,7 +22,6 @@ class companiesManager {
   }
 
   static async getByID(iduser) {
-    console.log(iduser)
 
     const client = new Client(connection);
     await client.connect();
