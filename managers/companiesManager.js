@@ -38,6 +38,7 @@ class companiesManager {
   }
 
   static async createNew(data) {
+    console.log(data)
 
     const client = new Client(connection);
     await client.connect()
