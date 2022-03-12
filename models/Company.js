@@ -27,7 +27,7 @@ class Company {
         this.#phone_number = props.phone_number;
         this.#social_media = props.social_media;
         this.#company_description = props.company_description;
-        this.#company_value = props.company_description;
+        this.#company_value = props.company_value;
         this.#num_employees = props.num_employees;
         this.#images = props.images;
         this.#time_modification = props.time_modification;

@@ -4,62 +4,76 @@ const Company = require("../models/Company.js");
 
 
 
-class companiesManager{
-  static async getAll(){
-
-      const client = new Client(connection);
-      await client.connect();   
-
-      try{
-        const companies = await client.query("SELECT * FROM companies;");
-        return companies;
-      } catch(e) {
-        return false;
-      } finally {
-        await client.end();
-      }
-      
-    }
-
-  static async getByID(idcompany){
+class companiesManager {
+  static async getAll() {
 
     const client = new Client(connection);
     await client.connect();
 
-    try{
+    try {
+      const companies = await client.query("SELECT * FROM companies;");
+      return companies;
+    } catch (e) {
+      return false;
+    } finally {
+      await client.end();
+    }
+
+  }
+
+  static async getByID(idcompany) {
+
+    const client = new Client(connection);
+    await client.connect();
+
+    try {
       const companies = await client.query(`SELECT * FROM companies WHERE idcompany = '${idcompany}';`);
       return companies
     } catch (e) {
       return false;
-    } finally{
+    } finally {
       await client.end();
     }
-    
+
   }
 
-  static async createNew(data){
+  static async createNew(data) {
 
     const client = new Client(connection);
     await client.connect()
 
-    try{
-      const newComp = await client.query(`INSERT INTO companies (name_description, sector, creation_date, logo, webpage, phone_number, social_media, company_value, num_employees, images) VALUES ('${data.name_description}', '${data.sector}', '${data.creation_date}', '${data.logo}', '${data.webpage}', '${data.phone_number}', '${data.social_media}', '${data.company_value}', '${data.num_employees}', '${data.images}');`);
+    try {
+      const newComp = await client.query(`INSERT INTO companies (iduser, name_description, sector, creation_date, logo, webpage, phone_number, social_media, company_value, num_employees, images) 
+      VALUES (
+        '${data.iduser}', 
+      '${data.name_description}', 
+      '${data.sector}', 
+      '${data.creation_date}', 
+      '${data.logo}', 
+      '${data.webpage}', 
+      '${data.phone_number}', 
+      '${data.social_media}', 
+      '${data.company_value}', 
+      '${data.num_employees}', 
+      '${data.images}');`);
+
+      console.log(newComp)
       return newComp
     } catch (e) {
       console.log("falla", e)
-       return false;
+      return false;
     } finally {
       await client.end();
     }
-    
+
   }
 
-  static async deleteByID(idcompany){
+  static async deleteByID(idcompany) {
 
     const client = new Client(connection);
     await client.connect();
 
-    try{
+    try {
       const deleteComp = await client.query(`DELETE FROM companies WHERE idcompany = '${idcompany}' ;`);
       return deleteComp
     } catch (e) {
@@ -70,12 +84,12 @@ class companiesManager{
 
   }
 
-  static async mod(data){
+  static async mod(data) {
 
     const client = new Client(connection);
     await client.connect();
 
-    try{
+    try {
       const modComp = await client.query(`UPDATE companies SET 
       name_description = '${data.name_description}', 
       sector = '${data.sector}', 
@@ -93,7 +107,7 @@ class companiesManager{
     } finally {
       await client.end();
     }
-    
+
   }
 
 }
