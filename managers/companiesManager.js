@@ -57,7 +57,6 @@ class companiesManager {
       '${data.num_employees}', 
       '${data.images}');`);
 
-      console.log(newComp)
       return newComp
     } catch (e) {
       console.log("falla", e)
