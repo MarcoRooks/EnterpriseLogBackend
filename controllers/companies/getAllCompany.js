@@ -6,9 +6,9 @@ async function getAllCompany(req, res) {
 
     if (bringAll == false) {
         res.status(204).json("Petition failed")
-    }else{
-        res.status(200).json(bringAll);
-    }   
+    } else {
+        res.status(200).json(bringAll.rows);
+    }
 }
 
 module.exports = getAllCompany;

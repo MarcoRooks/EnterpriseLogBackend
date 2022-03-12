@@ -21,14 +21,15 @@ class companiesManager {
 
   }
 
-  static async getByID(idcompany) {
+  static async getByID(iduser) {
+    console.log(iduser)
 
     const client = new Client(connection);
     await client.connect();
 
     try {
-      const companies = await client.query(`SELECT * FROM companies WHERE idcompany = '${idcompany}';`);
-      return companies
+      const companies = await client.query(`SELECT * FROM companies WHERE iduser = '${iduser}';`);
+      return companies.rows
     } catch (e) {
       return false;
     } finally {
