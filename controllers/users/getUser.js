@@ -4,9 +4,6 @@ const User = require('../../models/User');
 
 async function user(req, res) {
     const user = await usersManager.getByLogin(req.body);
-
-    console.log(req.body)
-
     const result = {
         username: user.userName,
         email: user.userEmail,
