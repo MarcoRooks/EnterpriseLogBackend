@@ -44,7 +44,7 @@ class companiesManager {
     await client.connect()
 
     try {
-      const newComp = await client.query(`INSERT INTO companies (iduser, name_description, sector, creation_date, logo, webpage, phone_number, social_media, company_value, num_employees, images) 
+      const newComp = await client.query(`INSERT INTO companies (iduser, name_description, sector, creation_date, logo, webpage, phone_number, social_media, company_value, num_employees, images,  company_description) 
       VALUES (
         '${data.iduser}', 
       '${data.name_description}', 
@@ -56,8 +56,9 @@ class companiesManager {
       '${data.social_media}', 
       '${data.company_value}', 
       '${data.num_employees}', 
-      '${data.images}');`);
-
+      '${data.images}',
+      '${data.company_description}');`);
+      
       return newComp
     } catch (e) {
       console.log("falla", e)
