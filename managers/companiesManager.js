@@ -37,6 +37,22 @@ class companiesManager {
 
   }
 
+  static async getByIDCompany(idcompany) {
+
+    const client = new Client(connection);
+    await client.connect();
+
+    try {
+      const companies = await client.query(`SELECT * FROM companies WHERE idcompany = '${idcompany}';`);
+      return companies.rows
+    } catch (e) {
+      return false;
+    } finally {
+      await client.end();
+    }
+
+  }
+
   static async createNew(data) {
     console.log(data)
 
@@ -107,6 +123,21 @@ class companiesManager {
       return false;
     } finally {
       await client.end();
+    }
+
+  }
+
+  static async buyCompany(iduser,idcompany) {
+    const client = new Client(connection);
+    await client.connect();
+
+    try {
+      const buycompany = await client.query(`UPDATE companies SET iduser='${iduser}' where idcompany='${idcompany}';`);
+      return buycompany
+    } catch (e) {
+      return false
+    } finally {
+      await client.end()
     }
 
   }
