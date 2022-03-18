@@ -58,6 +58,25 @@ class usersManager {
 
   }
 
+  static async getByLoginEmail(data) {
+
+    const client = new Client(connection);
+    await client.connect();
+
+    try {
+      const users = await client.query(`SELECT * FROM users WHERE email = '${data.email}' AND userpass = '${data.userpass}';`);
+      const theUser = new User(users.rows[0]);
+      return theUser;
+    } 
+    catch (e) {
+      return false;
+    } 
+    finally {
+      await client.end();
+    }
+
+  }
+
   //Dar alta de Nuevo Usuario
   static async createUser(data) {
 
