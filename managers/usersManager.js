@@ -6,6 +6,7 @@ const User = require("../models/User.js");
 
 class usersManager {
 
+  // get to list all registered users
   static async getAll() {
 
     const client = new Client(connection);
@@ -22,8 +23,8 @@ class usersManager {
     }
   }
 
+  // get to obtain user data by id
   static async getUser(data) {
-
     const client = new Client(connection);
     await client.connect()
 
@@ -38,16 +39,45 @@ class usersManager {
 
   }
 
-  //Esta ingresando username y userpass
-  static async getByLogin(data) {
+ //post for login with username
+  static async getByLogin(data) { 
 
     const client = new Client(connection);
     await client.connect();
 
     try {
-      const users = await client.query(`SELECT * FROM users WHERE username = '${data.email}' AND userpass = '${data.userpass}';`);
+      const users = await client.query(`SELECT * FROM users WHERE username = '${data.username}';`);
       const theUser = new User(users.rows[0]);
-      return theUser;
+      if (data.userpass === users.rows[0].userpass){
+        return theUser;
+      }
+      else {
+            return('wrong password');
+      }
+    } 
+    catch (e) {
+      return false;
+    } 
+    finally {
+      await client.end();
+    }
+  }
+
+//post for login with email
+
+  static async getByLoginEmail(data) { 
+    const client = new Client(connection);
+    await client.connect();
+
+    try {
+      const users = await client.query(`SELECT * FROM users WHERE email = '${data.email}';`);
+      const theUser = new User(users.rows[0]);
+      if (data.userpass === users.rows[0].userpass){
+        return theUser;
+      }
+      else {
+            return('wrong password');
+      }
     } 
     catch (e) {
       return false;
@@ -58,26 +88,7 @@ class usersManager {
 
   }
 
-  static async getByLoginEmail(data) {
-
-    const client = new Client(connection);
-    await client.connect();
-
-    try {
-      const users = await client.query(`SELECT * FROM users WHERE email = '${data.email}' AND userpass = '${data.userpass}';`);
-      const theUser = new User(users.rows[0]);
-      return theUser;
-    } 
-    catch (e) {
-      return false;
-    } 
-    finally {
-      await client.end();
-    }
-
-  }
-
-  //Dar alta de Nuevo Usuario
+  //post for register a new user
   static async createUser(data) {
 
     const client = new Client(connection);
@@ -96,7 +107,7 @@ class usersManager {
     }
 
   }
-
+// modify a registered user
   static async mod(data) {
 
     const client = new Client(connection);
