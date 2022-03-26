@@ -7,7 +7,8 @@ async function user(req, res) {
     const result = {
         username: user.userName,
         email: user.userEmail,
-        id: user.iduser
+        id: user.iduser, 
+        userpass: user.userPass
     }
 
     if (user == false) {
