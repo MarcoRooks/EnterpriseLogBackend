@@ -101,13 +101,14 @@ class companiesManager {
 
   }
 
-  static async mod(data) {
+  static async mod(data, id) {
 
     const client = new Client(connection);
     await client.connect();
+    console.log(data, id)
 
     try {
-      const modComp = await client.query(`UPDATE companies SET 
+      const modComp = await client.query(`UPDATE companies SET
       name_description = '${data.name_description}', 
       sector = '${data.sector}', 
       creation_date = '${data.creation_date}', 
@@ -117,7 +118,7 @@ class companiesManager {
       social_media = '${data.social_media}', 
       company_value = '${data.company_value}', 
       num_employees = '${data.num_employees}', 
-      images = '${data.images}' ;`);
+      images = '${data.images}' WHERE idcompany='${id}';`);
       return modComp;
     } catch (e) {
       return false;
