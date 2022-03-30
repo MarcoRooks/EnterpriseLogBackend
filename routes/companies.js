@@ -13,7 +13,7 @@ router.get('/company/:id', require('../controllers/companies/getCompanyByItId'))
 router.post('/create', require('../controllers/companies/createCompany'));
 
 //Modifica una empresa
-router.patch('/mod/:id', require('../controllers/companies/modCompany'));
+router.put('/mod/:id', require('../controllers/companies/modCompany'));
 
 //Compra una empresa
 router.put('/buy/:userid/:companyid', require('../controllers/companies/buyCompany'));

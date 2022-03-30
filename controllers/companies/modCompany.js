@@ -1,7 +1,7 @@
 const companiesManager = require('../../managers/companiesManager');
 
 function modCompany(req, res) {
-    const modified = companiesManager.mod(req.body)
+    const modified = companiesManager.mod(req.body, req.params.id)
 
     if (modified == false) {
         res.status(204).json("Petition not available")
