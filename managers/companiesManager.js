@@ -20,6 +20,20 @@ class companiesManager {
     }
 
   }
+  static async getByName(name_description){
+    const client = new Client(connection);
+    await client.connect();
+    try {
+      console.log('entra')
+      const companies = await client.query(`SELECT * FROM companies WHERE name_description ILIKE '%${name_description}%';`);
+      return companies.rows
+    } catch (error) {
+      return false;
+    } finally {
+      await client.end()
+    }
+
+  }
 
   static async getByID(iduser) {
 

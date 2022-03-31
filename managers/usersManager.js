@@ -47,6 +47,7 @@ class usersManager {
     try {
       const users = await client.query(`SELECT * FROM users WHERE email = '${data.email}' AND userpass = '${data.userpass}';`);
       const theUser = new User(users.rows[0]);
+      console.log(theUser)
       return theUser;
     } catch (e) {
       return false;

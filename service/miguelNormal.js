@@ -1,4 +1,5 @@
 const { Client } = require('pg')
+const md5 = require('md5')
 const User = require('./User');
 const Company = require('./Company');
 const Workers = require('./Workers');
@@ -26,7 +27,7 @@ async function insertUser(rows = 10) {
         let newUser = new User();
         const newPass = async (userPass) => { return md5(userPass)};
         const pass = await newPass(newUser.userPass);
-        const insert = `INSERT INTO users (name_description, email, avatar, username, userpass) VALUES ('${newUser.name_description}', '${newUser.userEmail}', '${newUser.avatar}', '${newUser.userName}', ${pass});`
+        const insert = `INSERT INTO users (name_description, email, avatar, username, userpass) VALUES ('${newUser.name_description}', '${newUser.userEmail}', '${newUser.avatar}', '${newUser.userName}',' ${pass}');`
         await client.query(insert);
     }
 }
@@ -58,7 +59,7 @@ async function insertWorkers(idCompany, rows = 3) {
         let newWorkers = new Workers();
         let nowIdCompany = idCompany[between(0, idCompany.length)];
         const columns = 'idcompany, name_description, photo, record';
-        const insert = `INSERT INTO workers (${columns}) VALUES ('${nowIdCompany.idcompany}', '${newWorkers.nameDescription}', '${newWorkers.photo}', '${newWorkers.records}');`
+        const insert = `INSERT INTO workers (${columns}) VALUES ('${nowIdCompany.idcompany}', '${newWorkers.nameDescription}', '${newWorkers.photo}', '${newWorkers.record}');`
         await client.query(insert);
     }
 }
