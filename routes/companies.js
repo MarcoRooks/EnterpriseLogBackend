@@ -9,6 +9,9 @@ router.get('/:id', require('../controllers/companies/getCompany'));
 //Devuelve una empresa en concreto buscando por su id
 router.get('/company/:id', require('../controllers/companies/getCompanyByItId'));
 
+//Buscar empresa por nombre
+router.get('/search/:name_description', require('../controllers/companies/getCompanyByName'))
+
 //Crea una empresa
 router.post('/create', require('../controllers/companies/createCompany'));
 

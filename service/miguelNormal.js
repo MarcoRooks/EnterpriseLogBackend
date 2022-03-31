@@ -1,4 +1,5 @@
 const { Client } = require('pg')
+const md5 = require('md5')
 const User = require('./User');
 const Company = require('./Company');
 const Workers = require('./Workers');
@@ -62,7 +63,7 @@ async function insertWorkers(idCompany, rows = 3) {
         let newWorkers = new Workers();
         let nowIdCompany = idCompany[between(0, idCompany.length)];
         const columns = 'idcompany, name_description, photo, record';
-        const insert = `INSERT INTO workers (${columns}) VALUES ('${nowIdCompany.idcompany}', '${newWorkers.nameDescription}', '${newWorkers.photo}', '${newWorkers.records}');`
+        const insert = `INSERT INTO workers (${columns}) VALUES ('${nowIdCompany.idcompany}', '${newWorkers.nameDescription}', '${newWorkers.photo}', '${newWorkers.record}');`
         await client.query(insert);
     }
 }
