@@ -97,7 +97,7 @@ class usersManager {
     const user = new User(data);
 
     try {
-      let newUser = await client.query(`INSERT INTO users (iduser, name_description, email, avatar, username, userpass) VALUES ('${user.iduser}', '${user.name_description}', '${user.userEmail}', '${user.avatar}', '${user.userName}', '${user.userPass}');`);
+      let newUser = await client.query(`INSERT INTO users (iduser, name_description, email, avatar, username, userpass, founds) VALUES ('${user.iduser}', '${user.name_description}', '${user.userEmail}', '${user.avatar}', '${user.userName}', '${user.userPass}',${user.founds});`);
       return user
     } catch (e) {
       console.log("ERROR PRESENTED:", e)
@@ -117,6 +117,23 @@ class usersManager {
       const modUser = await client.query(`UPDATE users SET 
         name_description = '${data.name_description}', 
         avatar = '${data.avatar}' ;`);
+      return modUser;
+    } catch (e) {
+      return false;
+    } finally {
+      await client.end()
+    }
+
+  }
+
+
+// modify a credit user
+  static async modCredit(finalfounds,iduser) {
+    const client = new Client(connection);
+    await client.connect()
+
+    try {
+      const modUser = await client.query(`UPDATE users SET founds = ${finalfounds} where iduser = '${iduser}';`);
       return modUser;
     } catch (e) {
       return false;

@@ -24,7 +24,6 @@ class companiesManager {
     const client = new Client(connection);
     await client.connect();
     try {
-      console.log('entra')
       const companies = await client.query(`SELECT * FROM companies WHERE name_description ILIKE '%${name_description}%';`);
       return companies.rows
     } catch (error) {
@@ -68,7 +67,6 @@ class companiesManager {
   }
 
   static async createNew(data) {
-    console.log(data)
 
     const client = new Client(connection);
     await client.connect()
