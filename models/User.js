@@ -58,8 +58,8 @@ class User {
         return this.#founds;
     }
 
-    set founds(newfounds) {
-        this.#founds = newfounds;
+    set founds(newFounds) {
+        this.#founds = newFounds;
     }
 
     get name_description() {
