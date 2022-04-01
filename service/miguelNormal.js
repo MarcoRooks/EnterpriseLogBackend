@@ -28,8 +28,8 @@ async function insertUser(rows = 10) {
         let newUser = new User();
         const newPass = async (userPass) => { return md5(userPass)};
         const pass = await newPass(newUser.userPass);
-        const insert = `INSERT INTO users (name_description, email, avatar, username, userpass) 
-        VALUES ('${newUser.name_description}', '${newUser.userEmail}', '${newUser.avatar}', '${newUser.userName}', '${pass}');`
+        const insert = `INSERT INTO users (name_description, email, avatar, username, userpass, founds) 
+        VALUES ('${newUser.name_description}', '${newUser.userEmail}', '${newUser.avatar}', '${newUser.userName}', '${pass}', ${newUser.founds});`
         await client.query(insert);
     }
 }

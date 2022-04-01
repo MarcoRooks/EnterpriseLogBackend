@@ -10,7 +10,10 @@ router.post('/email', require('../controllers/users/getUserByEmail'));
 router.post('/create', require('../controllers/users/createUser'));
 
 //Modifica un usuario
-router.patch('/mod/:id', require('../controllers/users/modUser'));
+router.put('/mod/:id', require('../controllers/users/modUser'));
+
+//Modifica el crédito de un usuario
+router.put('/modcredit/:id', require('../controllers/users/modUserCredit'));
 
 //Borrar usuario
 router.delete('/:id', require('../controllers/users/deleteUser'));

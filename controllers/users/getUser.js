@@ -8,7 +8,8 @@ async function user(req, res) {
         username: user.userName,
         email: user.userEmail,
         id: user.iduser, 
-        userpass: user.userPass
+        userpass: user.userPass,
+        founds: user.founds
     }
 
     if (user == false) {

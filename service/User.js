@@ -8,16 +8,18 @@ class User {
     #userEmail;
     #name_description;
     #avatar;
+    #founds;
 
     #text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.";
     #image = "https://www.latercera.com/resizer/ZwYtLBDucTx2GhRF45twlp7Ikxs=/375x250/smart/arc-anglerfish-arc2-prod-copesa.s3.amazonaws.com/public/IWE35XK3SFCNBGJYGC65NCEONA.jpg";
-
+    #credit = 100000000;
     constructor() {
         this.#userName = this.#generateRandomName();
         this.#userPass = this.#generateRandomPass();
         this.#userEmail = this.#generateRandomEmail();
         this.#name_description = this.#text;
         this.#avatar = this.#image;
+        this.#founds = this.#credit;
     }
 
     get iduser() {
@@ -66,6 +68,14 @@ class User {
 
     set avatar(newAvatar) {
         this.#avatar = newAvatar;
+    }
+
+    get founds() {
+        return this.#founds;
+    }
+
+    set founds(newFounds) {
+        this.#founds = newFounds;
     }
 
     #generateRandomName() {
