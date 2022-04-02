@@ -5,6 +5,7 @@ CREATE TABLE users (
     avatar varchar(255), 
     username varchar(255), 
     userpass varchar(255), 
+    founds int, 
     time_modification date default CURRENT_TIMESTAMP, 
     CONSTRAINT PK_puesto 
     PRIMARY KEY (iduser, email)
