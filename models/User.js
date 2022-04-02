@@ -7,6 +7,7 @@ class User {
     #userEmail;
     #name_description;
     #avatar;
+    #founds;
     #time_modification;
 
     #mockDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
@@ -19,6 +20,7 @@ class User {
         this.#userEmail = props.email;
         this.#name_description = props.name_description || this.#mockDescription;
         this.#avatar = props.avatar || this.#mockLogo;
+        this.#founds = props.founds;
     }
 
     get iduser() {
@@ -51,6 +53,13 @@ class User {
 
     set userEmail(newMail) {
         this.#userEmail = newMail;
+    }
+    get founds() {
+        return this.#founds;
+    }
+
+    set founds(newFounds) {
+        this.#founds = newFounds;
     }
 
     get name_description() {

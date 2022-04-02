@@ -1,7 +1,9 @@
 const { Client } = require('pg')
+const md5 = require('md5')
 const User = require('./User');
 const Company = require('./Company');
 const Workers = require('./Workers');
+const md5 = require('md5');
 //const config = require('../config.js');
 
 
@@ -26,7 +28,8 @@ async function insertUser(rows = 10) {
         let newUser = new User();
         const newPass = async (userPass) => { return md5(userPass)};
         const pass = await newPass(newUser.userPass);
-        const insert = `INSERT INTO users (name_description, email, avatar, username, userpass) VALUES ('${newUser.name_description}', '${newUser.userEmail}', '${newUser.avatar}', '${newUser.userName}', ${pass});`
+        const insert = `INSERT INTO users (name_description, email, avatar, username, userpass, founds) 
+        VALUES ('${newUser.name_description}', '${newUser.userEmail}', '${newUser.avatar}', '${newUser.userName}', '${pass}', ${newUser.founds});`
         await client.query(insert);
     }
 }
@@ -42,7 +45,9 @@ async function insertCompany(idUser, rows = 10) {
         let newCompany = new Company();
         let nowIdUser = idUser[between(0, idUser.length)];
         const columns = 'iduser, name_description, sector, creation_date, logo, webpage, phone_number, social_media, company_description, company_value, num_employees, images';
-        const insert = `INSERT INTO companies (${columns}) VALUES ('${nowIdUser.iduser}', '${newCompany.nameDescription}', '${newCompany.sector}', '${newCompany.creationDate}', '${newCompany.logo}', '${newCompany.webpage}', '${newCompany.phoneNumber}', '${newCompany.socialMedia}', '${newCompany.companyDescription}', '${newCompany.companyValue}', '${newCompany.numEmployees}', '${newCompany.images}');`
+        const insert = `INSERT INTO companies (${columns}) VALUES ('${nowIdUser.iduser}', '${newCompany.nameDescription}', 
+        '${newCompany.sector}', '${newCompany.creationDate}', '${newCompany.logo}', '${newCompany.webpage}', '${newCompany.phoneNumber}', 
+        '${newCompany.socialMedia}', '${newCompany.companyDescription}', '${newCompany.companyValue}', '${newCompany.numEmployees}', '${newCompany.images}');`
         await client.query(insert);
     }
 }
@@ -58,7 +63,7 @@ async function insertWorkers(idCompany, rows = 3) {
         let newWorkers = new Workers();
         let nowIdCompany = idCompany[between(0, idCompany.length)];
         const columns = 'idcompany, name_description, photo, record';
-        const insert = `INSERT INTO workers (${columns}) VALUES ('${nowIdCompany.idcompany}', '${newWorkers.nameDescription}', '${newWorkers.photo}', '${newWorkers.records}');`
+        const insert = `INSERT INTO workers (${columns}) VALUES ('${nowIdCompany.idcompany}', '${newWorkers.nameDescription}', '${newWorkers.photo}', '${newWorkers.record}');`
         await client.query(insert);
     }
 }

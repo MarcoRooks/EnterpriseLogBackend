@@ -2,16 +2,15 @@ const usersManager = require('../../managers/usersManager');
 const User = require('../../models/User');
 
 
-async function user(req, res) {
-    const user = await usersManager.getByLogin(req.body);
+async function getuserByEmail(req, res) {
+    const user = await usersManager.getByLoginEmail(req.body);
     const result = {
         username: user.userName,
         email: user.userEmail,
-        id: user.iduser, 
+        id: user.iduser,
         userpass: user.userPass,
         founds: user.founds
     }
-
     if (user == false) {
         res.status(204).json("Petition not found")
     } else {
@@ -19,4 +18,4 @@ async function user(req, res) {
     }
 }
 
-module.exports = user
+module.exports = getuserByEmail
